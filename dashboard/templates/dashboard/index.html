@@ -1,0 +1,138 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block body%}
+
+<section>
+	<div class="search_panel" id="search_panel_pin">
+		<div class="search_form">
+			<form id="search_form">
+				<div>
+					<input type="text" name="search">
+					<button type="submit">
+						<span id="search_text">Search</span>
+						<img src="/static/images/ripple.gif" id="loader">
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="result_nav_panel">
+			<div>
+				<span>100 Results found</span>
+			</div>
+			<div>
+				<div class="result_page_nav">
+					<span>Prev</span>
+					<span>1</span>
+					<span>Next</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="result_panel">
+
+		<!-- <div class="card">
+			<div>
+				<div class="source">
+					<span>Source</span>
+					<img src="#">
+				</div>
+				<div class="detail">
+					<div>
+						<span>Published On</span>
+					</div>
+					<div>
+						<h2>Title</h2>
+					</div>
+					<div>
+						<span>Link:</span>
+						<a href="#">URL</a>
+					</div>
+					<div>
+						<p>Description</p>
+					</div>
+				</div>
+			</div>
+			<div class="operate">
+				<div>
+					<button>Analyze</button>
+				</div>
+			</div>
+		</div> -->
+
+		
+		
+	</div>
+</section>
+
+<script id="social_template" type="text/x-jsrender">
+
+	<div class="card">
+		<div>
+			<div class="source">
+				<span>Source</span>
+				<img src="http://www.[%:network%].com/favicon.ico" alt="[%:network%]">
+			</div>
+			<div class="detail">
+				<div>
+					<span >Published On : [%:posted%]</span>
+				</div>
+				<div>
+					<h2>
+					[%if network == "facebook"%]
+						[%:urls[0].text%]
+					[%else%]
+						[%:user.name%]
+					[%/if%]
+					</h2>
+				</div>
+				<div>
+					<span>Link:</span>
+					<a href="[%:url%]">[%:url%]</a>
+				</div>
+				<div>
+					<p>[%:text%]</p>
+				</div>
+			</div>
+		</div>
+		<div class="operate">
+			<div>
+				<button>Analyze</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="news_template" type="text/x-jsrender">
+
+	<div class="card">
+		<div>
+			<div class="source">
+				<span>Source</span>
+				<img src="http://www.[%:source.name%]/favicon.ico" alt="[%:source.name%]">
+			</div>
+			<div class="detail">
+				<div>
+					<span >Published On : [%:publishedAt%]</span>
+				</div>
+				<div>
+					<h2>[%:title%]</h2>
+				</div>
+				<div>
+					<span>Link:</span>
+					<a href="[%:url%]">[%:url%]</a>
+				</div>
+				<div>
+					<p>[%:description%]</p>
+				</div>
+			</div>
+		</div>
+		<div class="operate">
+			<div>
+				<button>Analyze</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+{% endblock %}

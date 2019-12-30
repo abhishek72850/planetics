@@ -1,0 +1,43 @@
+{% extends 'dashboard/index.html' %}
+
+
+{% block soc_template %}
+<script id="myTmpl" type="text/x-jsrender">
+
+	<div class="card">
+		<div>
+			<div class="source">
+				<span>Source</span>
+				<img src="www.[%:network%].com" alt="[%:network%]">
+			</div>
+			<div class="detail">
+				<div>
+					<span >Published On : [%:posted%]</span>
+				</div>
+				<div>
+					<h2>
+					[%if network = "facebook"%]
+						[%:urls.text%]
+					[%else%]
+						[%:user.name%]
+					[%/if%]
+					</h2>
+				</div>
+				<div>
+					<span>Link:</span>
+					<a href="[%:url%]">[%:url%]</a>
+				</div>
+				<div>
+					<p>[%:text%]</p>
+				</div>
+			</div>
+		</div>
+		<div class="operate">
+			<div>
+				<button>Analyze</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn planetics.wsgi --log-file -
