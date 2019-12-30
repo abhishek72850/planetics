@@ -25,7 +25,7 @@ SECRET_KEY = 's5j8bkgk#s%^77rs9g#6c_$0i_nik(4huxu0_df2t0gcczq@^g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['planetics.herokuapp.com']
 
 
 # Application definition
@@ -124,8 +124,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'bankparser/static')]
