@@ -141,6 +141,15 @@ section{
 .detail>div:last-child{
 	margin-top: 1em;
 }
+.card>div>.graphics{
+	padding: .5em;
+}
+.card>div>.graphics>div{
+	margin-bottom: .5em;
+}
+.card>div>.graphics>div>img{
+	
+}
 .operate{
 	display: flex;
 	justify-content: right;
@@ -158,6 +167,10 @@ section{
 	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
 	height: 100%;
 	width: 100%;
+	cursor: pointer;
+}
+.operate>div>button:hover{
+	background-color: #ddd;
 }
 .background{
 	position:absolute;

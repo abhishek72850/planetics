@@ -112,4 +112,23 @@ class VisualAnalysis(APIView):
 class WholeAnalysis(APIView):
 
 	def post(self, request, format = None):
-		pass
+
+		if('type' in request.POST.keys()):
+			if(request.POST['type'] == 'social'):
+				data = ai.extractSocialAnalysis(request.POST['url'],request.POST['text'])
+				response = utils.BuildResponse(data)
+			elif(request.POST['type'] == 'news'):
+				data = ai.extractNewsAnalysis(request.POST['url'],request.POST['img_url'],request.POST['text'])
+				response = utils.BuildResponse(data)
+			else:
+				response = {
+					'status' : status.HTTP_400_BAD_REQUEST,
+					'message' : 'Invalid source invite'
+				}	
+		else:
+			response = {
+				'status' : status.HTTP_400_BAD_REQUEST,
+				'message' : 'Invalid or missing Parameters'
+			}
+
+		return Response(response)
