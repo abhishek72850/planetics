@@ -30,16 +30,25 @@ class PostManager:
 
 	def newsPost(self, query):
 
-		URL = "https://newsapi.org/v2/everything"
-		KEY = "417b2040d1074d8aaa580ba2d367c8df"
+		#URL = "https://newsapi.org/v2/everything"
+		#KEY = "417b2040d1074d8aaa580ba2d367c8df"
 
-		PARAMS = {
-			'apikey' : KEY,
-			'q' : query,
-			'sortBy' : 'publishedAt'
+		URL = "https://microsoft-azure-bing-news-search-v1.p.rapidapi.com/search"
+		
+		#querystring = {"q":"caa protest"}
+
+		headers = {
+		    'x-rapidapi-host': "microsoft-azure-bing-news-search-v1.p.rapidapi.com",
+		    'x-rapidapi-key': "VfnWl4o472mshxxLITfSdeDafLOqp155eWTjsnPuHCCRAolQ7w"
 		}
 
-		req = requests.get(url = URL, params = PARAMS, verify = False)
+		PARAMS = {
+			#'apikey' : KEY,
+			'q' : query,
+			#'sortBy' : 'publishedAt'
+		}
+
+		req = requests.get(url = URL,headers = headers, params = PARAMS, verify = False)
 
 		data = None
 		

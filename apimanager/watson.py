@@ -2,6 +2,8 @@ from ibm_watson import NaturalLanguageUnderstandingV1, ToneAnalyzerV3, VisualRec
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import *
 from ibm_watson import ApiException
+from gensim.summarization import summarize
+from newspaper import Article
 import json
 
 class Watson:
@@ -53,10 +55,13 @@ class Watson:
 	def extractSentiment(self, text, keywords):
 
 		try:
-			if(',' in keywords):
-				keywords = keywords.split(',')
+			if(type(keywords) == str):
+				if(',' in keywords):
+					keywords = keywords.split(',')
+				else:
+					keywords = [keywords]
 			else:
-				keywords = [keywords]
+				keywords = [word['text'] for word in keywords['keywords'] if(word['relevance']>0.50)]
 
 			response = self.natural_language_understanding.analyze(
 						text = text,
@@ -96,5 +101,41 @@ class Watson:
 
 		except ApiException as ex:
 			return {'message':ex.message, 'code':ex.code, 'success':False}
+
+		return {'data':response, 'success':True}
+
+	def extractSummary(self,content):
+
+		return summarize(content)
+
+	def extractSocialAnalysis(self, url, content = None):
+
+		keywords = self.extractKeywords(article.text)['data']
+
+		response = {
+			'summary':self.extractSummary(content),
+			'keywords':self.extractKeywords(content),
+			'sentiment':self.extractSentiment(content, keywords),
+			'tones':self.extractTones(content),
+			'visuals':None
+		}
+		
+		return {'data':response, 'success':True}
+
+	def extractNewsAnalysis(self, url, img_url, content = None):
+
+		article = Article(url)
+		article.download()
+		article.parse()
+		keywords = self.extractKeywords(article.text)['data']
+
+		response = {
+			'summary':self.extractSummary(article.text),
+			'keywords':keywords,
+			'sentiment':self.extractSentiment(article.text, keywords),
+			'visuals':self.extractVisualObjects(img_url),
+			'tones':self.extractTones(article.text),
+			'text':article.text
+		}
 
 		return {'data':response, 'success':True}

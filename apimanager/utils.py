@@ -14,3 +14,11 @@ def BuildResponse(data):
 		}
 
 	return response
+
+def IsSocialRequest(query):
+	lst = ['facebook','twitter','instagram','youtube','linkdin','glassdoor','quora']
+
+	if(lower(query) in lst):
+		return True
+	else:
+		return False
