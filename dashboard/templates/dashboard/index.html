@@ -59,88 +59,11 @@
 				</div>
 			</div>
 		</div> -->
+
+		
+		
 	</div>
 </section>
-<div class="analysis_cont">
-	<div class="analysis_loader">
-		<img src="/static/images/ripple.gif">
-	</div>
-</div> 
-
-<script id="analysis_template" type="text/x-jsrender">
-	<div class="analysis_details">
-		<div>
-			<div class="source">
-				<span>Source</span>
-				<img src="[%:source_img%]" alt="image">
-			</div>
-			<div class="detail">
-				<div>
-					<span >Published On : [%:publish%]</span>
-				</div>
-				<div>
-					<h2>[%:title%]</h2>
-				</div>
-				<div>
-					<span>Link:</span>
-					<a href="[%:link%]">[%:link%]</a>
-				</div>
-				<div class="sentiment">
-					<span>Overall document sentiment: [%:sentiment%]</span>
-				</div>
-				<div class="summary">
-					<p>[%:summary%]</p>
-				</div>
-				<div class="analysis">
-					[%for keywords%]
-						<div class="keywords
-							[%if sentiment.label == 'negative'%]
-								negative_keyword
-							[%/if%]
-						">
-							<span>[%:text%]</span>
-							<span>[%:sentiment.label%]</span>
-							<span>[%:relevance%]</span>
-						</div>
-					[%/for%]
-					
-						
-					<div class="tones">
-						[%for sentences_tones%]
-							[%if tones.length > 0%]
-								<div>
-									<p>[%:text%]</p>
-									<span>[%:tones[0].tone_name%]</span>
-								</div>
-							[%/if%]
-						[%/for%]
-					</div>
-				</div>
-				<div class="text_content">
-					<p>[%:text%]</p>
-				</div>
-			</div>
-			<div class="graphics">
-				<div>
-					<img src="[%:images%]" alt="image">
-					<div class="tag_list">
-						[%for visuals%]
-							<span>
-								<span>[%:class%]</span>
-								<span>[%:score%]</span>
-							</span>
-						[%/for%]
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="operate">
-		<div>
-			<button id="analyse" data-type="dialog">Close</button>
-		</div>
-	</div>
-</script>
 
 <script id="social_template" type="text/x-jsrender">
 
@@ -174,21 +97,7 @@
 		</div>
 		<div class="operate">
 			<div>
-				<button
-					id="analyse"
-					data-type="social"
-					data-imgSourceSrc="http://www.[%:network%].com/favicon.ico"
-					data-imgAlt="[%:network%]"
-					data-imgArticle=""
-					data-publishAt="[%:posted%]"
-					data-title="[%if network == "facebook"%]
-									[%:urls[0].text%]
-								[%else%]
-									[%:user.name%]
-								[%/if%]"
-					data-url="[%:url%]"
-					data-text="[%:text%]"
-					>Analyze</button>
+				<button>Analyze</button>
 			</div>
 		</div>
 	</div>
@@ -200,15 +109,14 @@
 		<div>
 			<div class="source">
 				<span>Source</span>
-
-				<img src="[%:provider[0].image.thumbnail.contentUrl.split('&')[0] onerror=''%]" alt="[%:provider[0].name%]">
+				<img src="http://www.[%:source.name%]/favicon.ico" alt="[%:source.name%]">
 			</div>
 			<div class="detail">
 				<div>
-					<span >Published On : [%:datePublished%]</span>
+					<span >Published On : [%:publishedAt%]</span>
 				</div>
 				<div>
-					<h2>[%:name%]</h2>
+					<h2>[%:title%]</h2>
 				</div>
 				<div>
 					<span>Link:</span>
@@ -218,25 +126,10 @@
 					<p>[%:description%]</p>
 				</div>
 			</div>
-			<div class="graphics">
-				<div>
-					<img src="[%:image.thumbnail.contentUrl.split('&')[0] onerror=''%]" alt="">
-				</div>
-			</div>
 		</div>
 		<div class="operate">
 			<div>
-				<button 
-					id="analyse"
-					data-type="news"
-					data-imgSourceSrc="[%:provider[0].image.thumbnail.contentUrl.split('&')[0] onerror=''%]"
-					data-imgAlt="[%:provider[0].name%]"
-					data-imgArticle="[%:image.thumbnail.contentUrl.split('&')[0] onerror=''%]"
-					data-publishAt="[%:datePublished%]"
-					data-title="[%:name%]"
-					data-url="[%:url%]"
-					data-text="[%:description%]"
-					>Analyze</button>
+				<button>Analyze</button>
 			</div>
 		</div>
 	</div>
