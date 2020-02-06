@@ -110,7 +110,7 @@ class Watson:
 
 	def extractSocialAnalysis(self, url, content = None):
 
-		keywords = self.extractKeywords(article.text)['data']
+		keywords = self.extractKeywords(content)['data']
 
 		response = {
 			'summary':self.extractSummary(content),
