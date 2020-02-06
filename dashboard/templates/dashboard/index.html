@@ -92,7 +92,7 @@
 					<p>[%:summary%]</p>
 				</div>
 				<div class="analysis">
-					[%for keywords%]
+					[%for keywords onError=""%]
 						<div class="keywords
 							[%if sentiment.label == 'negative'%]
 								negative_keyword
@@ -102,17 +102,21 @@
 							<span>[%:sentiment.label%]</span>
 							<span>[%:relevance%]</span>
 						</div>
+						[%else%]
+							<span>No keywords found</span>
 					[%/for%]
 					
 						
 					<div class="tones">
-						[%for sentences_tones%]
+						[%for sentences_tones onError=""%]
 							[%if tones.length > 0%]
 								<div>
 									<p>[%:text%]</p>
 									<span>[%:tones[0].tone_name%]</span>
 								</div>
 							[%/if%]
+							[%else%]
+								<span>No Tones found</span>
 						[%/for%]
 					</div>
 				</div>
@@ -124,11 +128,13 @@
 				<div>
 					<img src="[%:images%]" alt="image">
 					<div class="tag_list">
-						[%for visuals%]
+						[%for visuals onError=""%]
 							<span>
 								<span>[%:class%]</span>
 								<span>[%:score%]</span>
 							</span>
+							[%else%]
+								<span>No graphics found</span>
 						[%/for%]
 					</div>
 				</div>
