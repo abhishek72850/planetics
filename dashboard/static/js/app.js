@@ -50,7 +50,7 @@ $(function(){
 		$('#loader').show();
 
 		requestAjax({
-				url:'http://localhost:8000/api/search/page',
+				url:'https://planetics.herokuapp.com/api/search/page',
 				type:'GET',
 				data:{
 					'query':planetics.query,
@@ -69,7 +69,7 @@ $(function(){
 			this.dataset.type = "pagination";
 
 			requestAjax({
-					url:'http://localhost:8000/api/search/page',
+					url:'https://planetics.herokuapp.com/api/search/page',
 					type:'GET',
 					data:{
 						'query':planetics.query,
@@ -94,7 +94,7 @@ $(function(){
 			$('.analysis_cont').show();
 
 			requestAjax({
-				url:'http://localhost:8000/api/fetch/analysis/',
+				url:'https://planetics.herokuapp.com/api/fetch/analysis/',
 				type:'POST',
 				data:{
 					'type':this.dataset.type,
@@ -108,7 +108,7 @@ $(function(){
 			$('.analysis_cont').show();
 
 			requestAjax({
-				url:'http://localhost:8000/api/fetch/analysis/',
+				url:'https://planetics.herokuapp.com/api/fetch/analysis/',
 				type:'POST',
 				data:{
 					'type':this.dataset.type,
