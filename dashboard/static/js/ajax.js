@@ -1,7 +1,11 @@
 var requestAjax=function(options, dataset){
 
 	var object = {
+<<<<<<< HEAD
 		url:"http://localhost:8000/api/search/content",
+=======
+		url:"https://planetics.herokuapp.com/api/fetch/post",
+>>>>>>> 8f9626d40619103a4df08d8279be7ceda66977db
 		data:{},
 		type:"GET",
 		datatype:'jsonp'
