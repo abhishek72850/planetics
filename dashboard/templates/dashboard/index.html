@@ -14,6 +14,16 @@
 						<img src="/static/images/ripple.gif" id="loader">
 					</button>
 				</div>
+				<div class="social_select">
+					<label for="social_network">Select Platform:</label>
+					<select name="social_network" id="social_network">
+						<option value="all" selected>ALL</option>
+						<option value="facebook">Facebook</option>
+						<option value="twitter">Twitter</option>
+						<option value="youtube">Youtube</option>
+						<option value="instagram">Instagram</option>
+					</select>
+				</div>
 			</form>
 		</div>
 		<div class="result_nav_panel">
@@ -22,9 +32,9 @@
 			</div>
 			<div>
 				<div class="result_page_nav">
-					<span>Prev</span>
-					<span>1</span>
-					<span>Next</span>
+					<span id="prev_page">Prev</span>
+					<span id="page_counter">1</span>
+					<span id="next_page">Next</span>
 				</div>
 			</div>
 		</div>
@@ -86,16 +96,18 @@
 					<a href="[%:link%]">[%:link%]</a>
 				</div>
 				<div class="sentiment">
-					<span>Overall document sentiment: [%:sentiment%]</span>
+					<span>Overall document sentiment: [%:sentiment onerror='None'%]</span>
 				</div>
 				<div class="summary">
-					<p>[%:summary%]</p>
+					<p>[%:summary onerror='No Summary'%]</p>
 				</div>
 				<div class="analysis">
 					[%for keywords onError=""%]
 						<div class="keywords
 							[%if sentiment.label == 'negative'%]
 								negative_keyword
+							[%else sentiment.label == 'positive'%]
+								positive_keyword
 							[%/if%]
 						">
 							<span>[%:text%]</span>

@@ -11,13 +11,19 @@
 	<script type="text/javascript" src="{% static 'js/scrollmagic.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/jsrender.js' %}"></script>
 
+	<base target="_blank">
+
 	<script>
 		var controller = new ScrollMagic.Controller();
 
 		$.views.settings.delimiters("[%", "%]");
 
 		var planetics = {
-			data:null
+			query:null,
+			social_network:null,
+			data:null,
+			requestid:null,
+			page:0
 		};
 	</script>
 </head>

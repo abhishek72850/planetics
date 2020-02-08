@@ -110,15 +110,23 @@ class Watson:
 
 	def extractSocialAnalysis(self, url, content = None):
 
-		keywords = self.extractKeywords(content)['data']
-
 		response = {
-			'summary':self.extractSummary(content),
-			'keywords':self.extractKeywords(content),
-			'sentiment':self.extractSentiment(content, keywords),
-			'tones':self.extractTones(content),
+			'summary':None,
+			'keywords':None,
+			'sentiment':None,
+			'tones':None,
 			'visuals':None
 		}
+
+		try:
+			tones = self.extractTones(content)
+			summary = self.extractSummary(content)
+			keywords = self.extractKeywords(content)
+			sentiment = self.extractSentiment(content, keywords['data'])
+
+			response.update({'tones':tones, 'summary':summary,'keywords':keywords, 'sentiment':sentiment})
+		except (ApiException,ValueError,KeyError) as ex:
+			return {'data':response, 'success':True}		
 		
 		return {'data':response, 'success':True}
 

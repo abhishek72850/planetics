@@ -1,7 +1,7 @@
 var requestAjax=function(options, dataset){
 
 	var object = {
-		url:"http://localhost:8000/api/fetch/post",
+		url:"http://localhost:8000/api/search/content",
 		data:{},
 		type:"GET",
 		datatype:'jsonp'
@@ -14,7 +14,7 @@ var requestAjax=function(options, dataset){
 
 		$.views.settings.allowCode(true);
 
-		if(dataset.type == 'search'){
+		if(dataset.type == 'search' || dataset.type == 'pagination'){
 
 			planetics.data = data;
 
@@ -26,12 +26,30 @@ var requestAjax=function(options, dataset){
 			if( data['data']['social'] != null){
 				var html_s = s_tmpl.render(data['data']['social']['posts']);	
 				$(".result_panel").append(html_s);
+
+				planetics.requestid = data['data']['social']['meta']['requestid'];
 			}
 
-		    var html_n = n_tmpl.render(data['data']['news']['value']);
-		    $(".result_panel").append(html_n);
+			if( data['data']['news'] != null){
+		    	var html_n = n_tmpl.render(data['data']['news']['value']);
+		    }
+
+		    if(data['data']['news'] != null || data['data']['social'] != null){
+				$('#page_counter').text(planetics.page+1);
+				planetics.page++;
+
+				$(".result_panel").append(html_n);
+			}
+			else{
+				alert('No Content Available!!!!');
+			}
 
 		    $('#loader').hide();
+
+		    $('.result_page_nav').prop(false);
+		}
+		else if(dataset.type == 'pagination'){
+
 		}
 		else if(dataset.type == 'news'){
 			news_data = [{
@@ -64,10 +82,10 @@ var requestAjax=function(options, dataset){
 				'link':dataset.url,
 				'images':dataset.imgarticle,
 				'text':dataset.text,
-				'sentiment':data['data']['sentiment']['data']['sentiment']['document']['label'],
-				'keywords':data['data']['keywords']['keywords'],
-				'summary':data['data']['summary'],
-				'sentences_tones':data['data']['tones']['data']['sentences_tone'],
+				'sentiment':data['data']['sentiment'] === null ? null:data['data']['sentiment']['data']['sentiment']['document']['label'],
+				'keywords':data['data']['keywords'] === null ? null:data['data']['keywords']['keywords'],
+				'summary':data['data']['summary'] === null ? null:data['data']['summary'],
+				'sentences_tones':data['data']['tones'] === null ? null:data['data']['tones']['data']['sentences_tone'],
 				'visuals':data['data']['visuals']
 			}];
 
@@ -85,4 +103,8 @@ var requestAjax=function(options, dataset){
 
 		$('#loader').hide();
 	});;
+}
+
+var loadContent = function(data){
+
 }

@@ -15,6 +15,7 @@
 }
 .analysis_details{
 	overflow-y: auto;
+	width: 100%;
 	height: 33em;
 }
 .analysis_details>div:first-child{
@@ -24,15 +25,15 @@
 	margin: .5em 0;
 	padding: .5em;
 }
-.source{
+.analysis_details .source{
 	border-right: 1px solid #ccc;
   width: 10%;
 }
-.detail{
+.analysis_details .detail{
 	border-right: 1px solid #ccc;
 	width: 60%;
 }
-.graphics{
+.analysis_details .graphics{
 	border-right: 1px solid #ccc;
 	width: 40%;
 }
@@ -53,6 +54,10 @@
 	font-size: .9em;
 	height: 15em;
 	overflow-y: auto;
+}
+.text_content>p{
+	width: 100%;
+	word-wrap:anywhere;
 }
 .analysis{
 	

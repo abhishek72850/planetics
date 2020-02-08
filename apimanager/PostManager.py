@@ -9,15 +9,20 @@ class PostManager:
 		# 	ca_certs=certifi.where())
 		pass
 
-	def socialPost(self, query):
+	def socialPost(self, query, network = 'all', request_id = None, page = 0):
 
 		KEY = "5397b9e6749895576b71adc1889b1093"
 		URL = "https://api.social-searcher.com/v2/search"
 
 		PARAMS = {
 			'key' : KEY,
-			'q' : query
+			'q' : query,
+			'network' : network,
+			'page' : page
 		}
+
+		if(request_id):
+			PARAMS.update({'requestid':request_id})
 
 		req = requests.get(url = URL, params = PARAMS, verify = False)
 
@@ -28,7 +33,7 @@ class PostManager:
 
 		return data
 
-	def newsPost(self, query):
+	def newsPost(self, query, offset = 0):
 
 		#URL = "https://newsapi.org/v2/everything"
 		#KEY = "417b2040d1074d8aaa580ba2d367c8df"
@@ -45,6 +50,7 @@ class PostManager:
 		PARAMS = {
 			#'apikey' : KEY,
 			'q' : query,
+			'offset': 10*offset
 			#'sortBy' : 'publishedAt'
 		}
 

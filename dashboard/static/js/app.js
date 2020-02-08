@@ -1,5 +1,6 @@
 $(function(){
 	$('#loader').hide();
+	$('.result_page_nav').prop(true);
 
 	$('.nav_toggle').on('click',function(){
 		$('.slider_nav').toggleClass('slider_nav_show');
@@ -8,7 +9,7 @@ $(function(){
 	// create a scene
 	new ScrollMagic.Scene({
 	    //duration: 100, // the scene should last for a scroll distance of 100px
-	    offset: 176 // start this scene after scrolling for 50px
+	    offset: 120 // start this scene after scrolling for 50px
 	}).setPin('#search_panel_pin',{pushFollowers: false}).addTo(controller);
 
 	new ScrollMagic.Scene({
@@ -25,11 +26,59 @@ $(function(){
 
 		console.log(this.search.value);
 
+		planetics.query = this.search.value;
+		planetics.social_network = this.social_network.value;
+		planetics.page = 0;
+		planetics.requestid = null;
+
+		$('#page_counter').text(planetics.page+1);
+
 		this.dataset.type = "search";
 
-		console.log(this.dataset);
+		requestAjax({
+					data:{
+						'query':this.search.value,
+						'social_network':this.social_network.value
+					}
+				},this.dataset);
+	});
 
-		requestAjax({data:{'query':this.search.value}},this.dataset);
+	$('#next_page').on('click',function(){
+
+		this.dataset.type = "pagination";
+
+		$('#loader').show();
+
+		requestAjax({
+				url:'http://localhost:8000/api/search/page',
+				type:'GET',
+				data:{
+					'query':planetics.query,
+					'social_network':planetics.social_network,
+					'requestid':planetics.requestid,
+					'page':planetics.page
+				}
+			},this.dataset);		
+	});
+
+	$('#prev_page').on('click',function(){
+
+		if(planetics.page > 0){
+			$('#loader').show();
+			planetics.page -= 2;
+			this.dataset.type = "pagination";
+
+			requestAjax({
+					url:'http://localhost:8000/api/search/page',
+					type:'GET',
+					data:{
+						'query':planetics.query,
+						'social_network':planetics.social_network,
+						'requestid':planetics.requestid,
+						'page':planetics.page
+					}
+				},this.dataset);	
+		}	
 	});
 
 	$('body').delegate('#analyse','click',function(){
@@ -45,7 +94,7 @@ $(function(){
 			$('.analysis_cont').show();
 
 			requestAjax({
-				url:'https://planetics.herokuapp.com/api/fetch/analysis/',
+				url:'http://localhost:8000/api/fetch/analysis/',
 				type:'POST',
 				data:{
 					'type':this.dataset.type,
@@ -59,7 +108,7 @@ $(function(){
 			$('.analysis_cont').show();
 
 			requestAjax({
-				url:'https://planetics.herokuapp.com/api/fetch/analysis/',
+				url:'http://localhost:8000/api/fetch/analysis/',
 				type:'POST',
 				data:{
 					'type':this.dataset.type,
