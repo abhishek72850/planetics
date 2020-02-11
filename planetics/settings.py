@@ -74,6 +74,7 @@ CACHES = {
 
 CORS_ORIGIN_WHITELIST = [
     'https://planetics.herokuapp.com',
+    'http://planetics.herokuapp.com',
 ]
 
 ROOT_URLCONF = 'planetics.urls'
