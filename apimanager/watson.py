@@ -104,9 +104,16 @@ class Watson:
 
 		return {'data':response, 'success':True}
 
-	def extractSummary(self,content):
+	def extractSummary(self,content,api_call = False):
 
-		return summarize(content)
+		summary = summarize(content)
+		if(api_call):
+			try:
+				return {'data':summary, 'success':True}
+			except ApiException as ex:
+				return {'message':ex.message, 'code':ex.code, 'success':False}
+
+		return summary 
 
 	def extractSocialAnalysis(self, url, content = None):
 

@@ -102,7 +102,7 @@ var requestAjax=function(options, dataset){
 		alert(jqXHR.statusText);
 
 		$('#loader').hide();
-	});;
+	});
 }
 
 var loadContent = function(data){

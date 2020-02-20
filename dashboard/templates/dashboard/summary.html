@@ -1,0 +1,35 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block body%}
+
+<section class="summary_section">
+	<div class="primary_cont">
+		<div class="sub_cont form_cont">
+			<form>
+				<div>
+					<span>Enter your Article here:</span>
+				</div>
+				<div>
+					<textarea name="content" required></textarea>
+				</div>
+				<div>
+					<button type="submit">Get Summary</button>
+				</div>
+			</form>
+		</div>
+		<div class="sub_cont summary_cont">
+			<div>
+				<span>Summary of Content:</span>
+			</div>
+			<div class="analysis_loader">
+				<img src="/static/images/ripple.gif">
+			</div>
+			<div>
+				<p class="summary_para"></p>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

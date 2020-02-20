@@ -1,5 +1,7 @@
 $(function(){
 	$('#loader').hide();
+	$('.analysis_loader').hide();
+
 	$('.result_page_nav').prop(true);
 
 	$('.nav_toggle').on('click',function(){

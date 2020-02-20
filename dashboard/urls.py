@@ -3,5 +3,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.dashboard)
+    path('', views.dashboard),
+    path('summary',views.text_summary)
 ]
