@@ -1,0 +1,8 @@
+__pycache__
+venv
+*.pyc
+.idea
+db.sqlite3
+exp.py
+._.DS_Store
+._settings.py

@@ -20,9 +20,10 @@ section{
 	width: 50%;
 }
 .search_form>form{
-	
+	display: flex;
 }
 .search_form>form>div:first-child{
+	width: 70%;
 	position: relative;
 	border: 1px solid #000;
 	box-shadow: 0 2px 3px rgba(0,0,0,0.5);
@@ -32,19 +33,18 @@ section{
 	height: 100%;
 	width: 100%;
 	border: none;
+	padding: 1em;
 }
 .search_form>form>div>button{
 	position: absolute;
 	border:none;
 	right: 0;
-	width: 9%;
+	width: 20%;
 	height: 100%;
 }
 .social_select{
 	display: flex;
-	justify-content: right;
-	justify-content: flex-end;
-	margin: .5em 0;
+	padding-left: 0.5em;
 }
 .social_select>label{
 	display: flex;
@@ -53,11 +53,12 @@ section{
 	height: 2.5em;
 	border: 1px solid #555;
 	border-right: none;
+	min-height: 100%;
 }
 .social_select>select{
 	text-align: center;
-	height: 3em;
-	width: 15%;
+	min-height: 100%;
+	width: auto;
 	border: 1px solid #555;
 	border-left: none;
 }
@@ -70,7 +71,7 @@ section{
 }
 .result_nav_panel{
 	background-color: #fff;
-	padding: 2em 0 1em 0; 
+	padding: 2em 0 1em 0;
 	width: 100%;
 	display: flex;
 	height: auto;
@@ -89,6 +90,7 @@ section{
 	border: 1px solid #aaa;
 	width: 10em;
 	height: 2em;
+	margin-left: 3.5em;
 }
 .result_page_nav>span{
 	display: inline-block;
@@ -132,15 +134,19 @@ section{
 	width: 100%;
 	text-align: center;
 	padding: .1em;
+	border: 1px solid #ccc;
+	border-bottom: none;
 }
 .source>img{
 	width: 100%;
 	font-size: 0.9em;
 	word-wrap:anywhere;
+	border: 1px solid #ccc;
+	border-top: none;
 }
 .detail{
 	padding: 0 1em;
-	width: 92%;
+	width: 90%;
 }
 .detail>div{
 	margin-bottom: .5em;

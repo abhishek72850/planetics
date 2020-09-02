@@ -142,7 +142,7 @@ class Watson:
 		article = Article(url)
 		article.download()
 		article.parse()
-		keywords = self.extractKeywords(article.text)['data']
+		keywords = self.extractKeywords(article.text).get('data', [])
 
 		response = {
 			'summary':self.extractSummary(article.text),

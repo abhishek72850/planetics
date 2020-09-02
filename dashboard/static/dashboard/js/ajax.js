@@ -1,7 +1,7 @@
 var requestAjax=function(options, dataset){
 
 	var object = {
-		url:"https://planetics.herokuapp.com/api/search/content",
+		url: window.location.origin + "/api/search/content",
 		data:{},
 		type:"GET",
 		datatype:'jsonp'
@@ -60,12 +60,14 @@ var requestAjax=function(options, dataset){
 				'link':dataset.url,
 				'images':dataset.imgarticle,
 				'text':data['data']['text'],
-				'sentiment':data['data']['sentiment']['data']['sentiment']['document']['label'],
-				'keywords':data['data']['keywords']['keywords'],
-				'summary':data['data']['summary'],
-				'sentences_tones':data['data']['tones']['data']['sentences_tone'],
-				'visuals':data['data']['visuals']['data']['images'][0]['classifiers'][0]['classes']
+				'sentiment':data['data']['sentiment'] === null ? '':data['data']['sentiment']['data']['sentiment']['document']['label'],
+                'keywords':data['data']['keywords'] === null ? []:data['data']['keywords']['keywords'],
+                'summary':data['data']['summary'] === null ? '':data['data']['summary'],
+                'sentences_tones':data['data']['tones'] === null ? []:data['data']['tones']['data']['sentences_tone'],
+				'visuals':data['data']['visuals'] === null ? []:data['data']['visuals']['data']['images'][0]['classifiers'][0]['classes']
 			}];
+
+			console.log(news_data);
 
 			var analysis_tmpl = $.templates("#analysis_template");
 			var html_analysis = analysis_tmpl.render(news_data);
@@ -82,12 +84,14 @@ var requestAjax=function(options, dataset){
 				'link':dataset.url,
 				'images':dataset.imgarticle,
 				'text':dataset.text,
-				'sentiment':data['data']['sentiment'] === null ? null:data['data']['sentiment']['data']['sentiment']['document']['label'],
-				'keywords':data['data']['keywords'] === null ? null:data['data']['keywords']['keywords'],
-				'summary':data['data']['summary'] === null ? null:data['data']['summary'],
-				'sentences_tones':data['data']['tones'] === null ? null:data['data']['tones']['data']['sentences_tone'],
-				'visuals':data['data']['visuals']
+				'sentiment':data['data']['sentiment'] === null ? '':data['data']['sentiment']['data']['sentiment']['document']['label'],
+				'keywords':data['data']['keywords'] === null ? []:data['data']['keywords']['data']['keywords'],
+				'summary':data['data']['summary'] === null ? '':data['data']['summary'],
+				'sentences_tones':data['data']['tones'] === null ? []:data['data']['tones']['data']['sentences_tone'],
+				'visuals':data['data']['visuals'] === null ? []:data['data']['visuals']['data']['images'][0]['classifiers'][0]['classes']
 			}];
+
+			console.log(social_data);
 
 			var analysis_tmpl = $.templates("#analysis_template");
 			var html_analysis = analysis_tmpl.render(social_data);

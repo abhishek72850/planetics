@@ -15,13 +15,13 @@ from django.shortcuts import render
 ai = watson.Watson()
 post = PostManager.PostManager()
 
-class ContentFetcher(APIView):
 
+class ContentFetcher(APIView):
 	@method_decorator(cache_page(60*60*2))
 	@method_decorator(vary_on_cookie)
 	def get(self, request, format = None):
 
-		if('query' in request.GET.keys()):
+		if 'query' in request.GET.keys():
 
 			social = post.socialPost(request.GET['query'], request.GET['social_network'])
 
@@ -42,12 +42,13 @@ class ContentFetcher(APIView):
 
 		return Response(response)
 
+
 class ContentPageFetcher(APIView):
 
 	@method_decorator(cache_page(60*60*2))
 	def get(self, request, format = None):
 
-		if('query' in request.GET.keys()):
+		if 'query' in request.GET.keys():
 
 			social = post.socialPost(request.GET['query'], request.GET['social_network'], request.GET['requestid'], request.GET['page'])
 
@@ -68,11 +69,12 @@ class ContentPageFetcher(APIView):
 
 		return Response(response)
 
+
 class KeywordAnalysis(APIView):
 
 	def post(self, request, format = None):
 
-		if('text' in request.POST.keys()):
+		if 'text' in request.POST.keys():
 			data = ai.extractKeywords(request.POST['text'])
 
 			response = utils.BuildResponse(data)
@@ -85,11 +87,12 @@ class KeywordAnalysis(APIView):
 
 		return Response(response)
 
+
 class SentimentAnalysis(APIView):
 
 	def post(self, request, format = None):
 
-		if('text' in request.POST.keys() and 'kwords' in request.POST.keys()):
+		if 'text' in request.POST.keys() and 'kwords' in request.POST.keys():
 
 			data = ai.extractSentiment(request.POST['text'], request.POST['kwords'])
 
@@ -103,11 +106,12 @@ class SentimentAnalysis(APIView):
 
 		return Response(response)
 
+
 class ToneAnalysis(APIView):
 
 	def post(self, request, format = None):
 
-		if('text' in request.POST.keys()):
+		if 'text' in request.POST.keys():
 
 			data = ai.extractTones(request.POST['text'])
 
@@ -121,11 +125,12 @@ class ToneAnalysis(APIView):
 
 		return Response(response)
 
+
 class VisualAnalysis(APIView):
 
 	def post(self, request, format = None):
 
-		if('url' in request.POST.keys()):
+		if 'url' in request.POST.keys():
 
 			data = ai.extractVisualObjects(request.POST['url'])
 
@@ -139,11 +144,12 @@ class VisualAnalysis(APIView):
 
 		return Response(response)
 
+
 class SummaryAnalysis(APIView):
 
 	def post(self, request, format = None):
 
-		if('content' in request.POST.keys()):
+		if 'content' in request.POST.keys():
 			data = ai.extractSummary(request.POST['content'], True)
 
 			response = utils.BuildResponse(data)
@@ -158,14 +164,15 @@ class SummaryAnalysis(APIView):
 
 
 class WholeAnalysis(APIView):
-
+	@method_decorator(cache_page(60*60*2))
+	@method_decorator(vary_on_cookie)
 	def post(self, request, format = None):
 
-		if('type' in request.POST.keys()):
-			if(request.POST['type'] == 'social'):
+		if 'type' in request.POST.keys():
+			if request.POST['type'] == 'social':
 				data = ai.extractSocialAnalysis(request.POST['url'],request.POST['text'])
 				response = utils.BuildResponse(data)
-			elif(request.POST['type'] == 'news'):
+			elif request.POST['type'] == 'news':
 				data = ai.extractNewsAnalysis(request.POST['url'],request.POST['img_url'],request.POST['text'])
 				response = utils.BuildResponse(data)
 			else:

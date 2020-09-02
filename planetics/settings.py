@@ -25,7 +25,7 @@ SECRET_KEY = 's5j8bkgk#s%^77rs9g#6c_$0i_nik(4huxu0_df2t0gcczq@^g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['planetics.herokuapp.com','text-summary.socialmediapulsemonitor.com', 'text-summary.thesocialmediapulse.com']
+ALLOWED_HOSTS = ['planetics.herokuapp.com','text-summary.socialmediapulsemonitor.com', 'text-summary.thesocialmediapulse.com', '*']
 
 
 # Application definition
@@ -148,8 +148,8 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'dashboard/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'dashboard/static')]

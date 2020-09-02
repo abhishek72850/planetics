@@ -11,7 +11,7 @@
 					<input type="text" name="search" required>
 					<button type="submit">
 						<span id="search_text">Search</span>
-						<img src="/static/images/ripple.gif" id="loader">
+						<img src="/staticfiles/dashboard/images/ripple.gif" id="loader">
 					</button>
 				</div>
 				<div class="social_select">
@@ -28,7 +28,7 @@
 		</div>
 		<div class="result_nav_panel">
 			<div>
-				<span>100 Results found</span>
+				<span></span>
 			</div>
 			<div>
 				<div class="result_page_nav">
@@ -73,7 +73,7 @@
 </section>
 <div class="analysis_cont">
 	<div class="analysis_loader">
-		<img src="/static/images/ripple.gif">
+		<img src="/staticfiles/dashboard/images/ripple.gif">
 	</div>
 </div> 
 
@@ -96,59 +96,92 @@
 					<a href="[%:link%]">[%:link%]</a>
 				</div>
 				<div class="sentiment">
-					<span>Overall document sentiment: [%:sentiment onerror='None'%]</span>
+					[%if sentiment.length > 0%]
+						<span>Overall document sentiment: [%:sentiment onerror='None'%]</span>
+					[%else%]
+						<span class="no-sentiment no-result">Unable to extract sentiment from Article/Post</span>
+					[%/if%]
 				</div>
 				<div class="summary">
-					<p>[%:summary onerror='No Summary'%]</p>
+					<h3>Summary of the Article/Post:</h3>
+					[%if summary.length > 0%]
+						<p>[%:summary onerror='No Summary'%]</p>
+					[%else%]
+						<p class="no-summary no-result">Unable to extract summary from Article/Post</p>
+					[%/if%]
 				</div>
 				<div class="analysis">
-					[%for keywords onError=""%]
-						<div class="keywords
-							[%if sentiment.label == 'negative'%]
-								negative_keyword
-							[%else sentiment.label == 'positive'%]
-								positive_keyword
-							[%/if%]
-						">
-							<span>[%:text%]</span>
-							<span>[%:sentiment.label%]</span>
-							<span>[%:relevance%]</span>
-						</div>
+					<div class="keywords">
+						<h3>Keywords found in Article/Post:</h3>
+						[%if keywords.length > 0%]
+							<div class="keywords-head">
+								<span>Keyword</span>
+								<span>Sentiment</span>
+								<span>Accuracy</span>
+							</div>
+							[%for keywords onError=""%]
+								<div class="keywords-row">
+									<span>[%:text%]</span>
+									<span>[%:sentiment.label%]</span>
+									<span>[%:relevance%]</span>
+								</div>
+							[%/for%]
 						[%else%]
-							<span>No keywords found</span>
-					[%/for%]
-					
+							<span class="no-keywords no-result">No keywords found</span>
+						[%/if%]
+					</div>
 						
 					<div class="tones">
-						[%for sentences_tones onError=""%]
-							[%if tones.length > 0%]
-								<div>
-									<p>[%:text%]</p>
-									<span>[%:tones[0].tone_name%]</span>
-								</div>
-							[%/if%]
-							[%else%]
-								<span>No Tones found</span>
-						[%/for%]
+						<h3>Tones extracted for each sentences in Article/Post:</h3>
+						[%if sentences_tones.length > 0%]
+							<div class="tones-head">
+								<span>Sentence</span>
+								<span>Tone</span>
+							</div>
+							[%for sentences_tones onError=""%]
+								[%if tones.length > 0%]
+									<div class="tones-row">
+										<span>[%:text%]</span>
+										<span>[%:tones[0].tone_name%]</span>
+									</div>
+								[%/if%]
+							[%/for%]
+						[%else%]
+							<span class="no-tones no-result">No Tones found</span>
+						[%/if%]
 					</div>
 				</div>
 				<div class="text_content">
+					<h3>Original Article/Post:</h3>
 					<p>[%:text%]</p>
 				</div>
 			</div>
 			<div class="graphics">
+				<h2>Images</h2>
 				<div>
-					<img src="[%:images%]" alt="image">
-					<div class="tag_list">
-						[%for visuals onError=""%]
-							<span>
-								<span>[%:class%]</span>
-								<span>[%:score%]</span>
-							</span>
+					[%if images.length > 0%]
+						<img src="[%:images%]" alt="image">
+						<a href="[%:images%]">Click here to goto image</a>
+						<div>
+							<h3>Element detected in image:</h3>
+							[%if visuals.length > 0%]
+								<div class="graphics-head">
+									<span>Element</span>
+									<span>Accuracy</span>
+								</div>
+								[%for visuals onError=""%]
+									<div class="graphics-row">
+										<span>[%:class%]</span>
+										<span>[%:score%]</span>
+									</div>
+								[%/for%]
 							[%else%]
-								<span>No graphics found</span>
-						[%/for%]
-					</div>
+								<span class="no-graphics no-result">No elements found</span>
+							[%/if%]
+						</div>
+					[%else%]
+						<span class="no-result">No images found</span>
+					[%/if%]
 				</div>
 			</div>
 		</div>

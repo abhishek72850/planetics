@@ -4,10 +4,6 @@ $(function(){
 
 	$('.result_page_nav').prop(true);
 
-	$('.nav_toggle').on('click',function(){
-		$('.slider_nav').toggleClass('slider_nav_show');
-	});
-
 	// create a scene
 	new ScrollMagic.Scene({
 	    //duration: 100, // the scene should last for a scroll distance of 100px
@@ -52,7 +48,7 @@ $(function(){
 		$('#loader').show();
 
 		requestAjax({
-				url:'https://planetics.herokuapp.com/api/search/page',
+				url: window.location.origin + '/api/search/page',
 				type:'GET',
 				data:{
 					'query':planetics.query,
@@ -71,7 +67,7 @@ $(function(){
 			this.dataset.type = "pagination";
 
 			requestAjax({
-					url:'https://planetics.herokuapp.com/api/search/page',
+					url: window.location.origin + '/api/search/page',
 					type:'GET',
 					data:{
 						'query':planetics.query,
@@ -96,7 +92,7 @@ $(function(){
 			$('.analysis_cont').show();
 
 			requestAjax({
-				url:'https://planetics.herokuapp.com/api/fetch/analysis/',
+				url: window.location.origin + '/api/fetch/analysis/',
 				type:'POST',
 				data:{
 					'type':this.dataset.type,
@@ -110,7 +106,7 @@ $(function(){
 			$('.analysis_cont').show();
 
 			requestAjax({
-				url:'https://planetics.herokuapp.com/api/fetch/analysis/',
+				url: window.location.origin + '/api/fetch/analysis/',
 				type:'POST',
 				data:{
 					'type':this.dataset.type,
