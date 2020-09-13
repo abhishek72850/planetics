@@ -6,6 +6,9 @@ section{
 }
 
 .search_panel{
+	background-image: url('/staticfiles/dashboard/images/bg.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
 	background-color: #fff;
 	z-index: 8;
 	height: 40%;
@@ -16,37 +19,49 @@ section{
 	align-items: center;
 }
 .search_form{
-	background-color: #fff;
 	width: 50%;
 }
 .search_form>form{
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.search_form>form>div{
+	margin: 0.5em 0;
 }
 .search_form>form>div:first-child{
-	width: 70%;
+	width: 100%;
 	position: relative;
-	border: 1px solid #000;
-	box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 	height: 3em;
 }
 .search_form>form>div>input{
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.459);
+	border: 1px solid #000;
+	border-radius: 5px;
+	font-size: 0.9em;
 	height: 100%;
 	width: 100%;
 	border: none;
 	padding: 1em;
 }
 .search_form>form>div>button{
-	position: absolute;
-	border:none;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.459);
+  border: 1px solid #000;
+	border-radius: 5px;
+	background-color: #ffffffee;
 	right: 0;
-	width: 20%;
-	height: 100%;
+	width: 15em;
+	height: 3.5em;
+	cursor: pointer;
+}
+.search_form>form>div>button:hover{
+	background-color: #0000ff99;
 }
 .social_select{
 	display: flex;
-	padding-left: 0.5em;
 }
 .social_select>label{
+	border-radius: 5px 0 0 5px;
 	display: flex;
 	align-items: center;
 	padding: 0 .5em;
@@ -58,9 +73,10 @@ section{
 .social_select>select{
 	text-align: center;
 	min-height: 100%;
-	width: auto;
+	width: 10em;
 	border: 1px solid #555;
 	border-left: none;
+		border-radius: 0 5px 5px 0;
 }
 #loader{
 	position: absolute;
@@ -70,7 +86,6 @@ section{
 	width: 80%;
 }
 .result_nav_panel{
-	background-color: #fff;
 	padding: 2em 0 1em 0;
 	width: 100%;
 	display: flex;
@@ -83,14 +98,11 @@ section{
 	color: #777;
 }
 .result_page_nav{
-	background-color: #eee;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	border: 1px solid #aaa;
 	width: 10em;
 	height: 2em;
-	margin-left: 3.5em;
 }
 .result_page_nav>span{
 	display: inline-block;
@@ -101,7 +113,7 @@ section{
 	align-items: center;
 }
 .result_page_nav>span:not(:nth-child(3)){
-	border-right: 1px solid #ccc;
+  cursor: pointer;
 }
 .result_panel{
 	display: flex;
@@ -216,4 +228,23 @@ section{
 	background-repeat: no-repeat;
 	background-size:100%;
 	filter: blur(3px);
+}
+.screen_loader{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 8;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #00000055;
+}
+.screen_loader>div{
+
+}
+.screen_loader>div>img{
+	height: 10em;
+	width: 10em;
 }

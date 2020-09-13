@@ -9,10 +9,6 @@
 			<form id="search_form">
 				<div>
 					<input type="text" name="search" required>
-					<button type="submit">
-						<span id="search_text">Search</span>
-						<img src="/staticfiles/dashboard/images/ripple.gif" id="loader">
-					</button>
 				</div>
 				<div class="social_select">
 					<label for="social_network">Select Platform:</label>
@@ -24,17 +20,20 @@
 						<option value="instagram">Instagram</option>
 					</select>
 				</div>
+				<div>
+					<button type="submit">
+						<span id="search_text">Search</span>
+					</button>
+				</div>
 			</form>
 		</div>
 		<div class="result_nav_panel">
 			<div>
-				<span></span>
-			</div>
-			<div>
 				<div class="result_page_nav">
-					<span id="prev_page">Prev</span>
-					<span id="page_counter">1</span>
-					<span id="next_page">Next</span>
+					<span class="pageWord">Page:</span>
+	                <span href="#" id="prev_page"> <img src="/staticfiles/dashboard/images/left.png" alt=""></span>
+	                <span id="page_counter" class="pageNumber">1</span>
+	                <span id="next_page"> <img src="/staticfiles/dashboard/images/right.png" alt=""></span>
 				</div>
 			</div>
 		</div>
@@ -71,6 +70,11 @@
 		</div> -->
 	</div>
 </section>
+<div class="screen_loader">
+	<div>
+		<img src="/staticfiles/dashboard/images/ripple.gif">
+	</div>
+</div>
 <div class="analysis_cont">
 	<div class="analysis_loader">
 		<img src="/staticfiles/dashboard/images/ripple.gif">
@@ -79,6 +83,9 @@
 
 <script id="analysis_template" type="text/x-jsrender">
 	<div class="analysis_details">
+		<div>
+			<h1>[%:analysis_type%] Analysis</h1>
+		</div>
 		<div>
 			<div class="source">
 				<span>Source</span>
@@ -97,7 +104,13 @@
 				</div>
 				<div class="sentiment">
 					[%if sentiment.length > 0%]
-						<span>Overall document sentiment: [%:sentiment onerror='None'%]</span>
+						[%if sentiment = 'Negative'%]
+							<span>Overall document sentiment: <span class='sentiment_negative'>[%:sentiment onerror='None'%]</span></span>
+						[%else sentiment = 'Positive'%]
+							<span>Overall document sentiment: <span class='sentiment_positive'>[%:sentiment onerror='None'%]</span></span>
+						[%else%]
+							<span>Overall document sentiment: <span class='sentiment_neutral'>[%:sentiment onerror='None'%]</span></span>
+						[%/if%]	
 					[%else%]
 						<span class="no-sentiment no-result">Unable to extract sentiment from Article/Post</span>
 					[%/if%]

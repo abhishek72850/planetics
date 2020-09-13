@@ -1,6 +1,7 @@
 $(function(){
 	$('#loader').hide();
 	$('.analysis_loader').hide();
+	$('.screen_loader').hide();
 
 	$('.result_page_nav').prop(true);
 
@@ -21,6 +22,7 @@ $(function(){
 		e.preventDefault();
 
 		$('#loader').show();
+		$('.screen_loader').show();
 
 		console.log(this.search.value);
 
@@ -46,6 +48,7 @@ $(function(){
 		this.dataset.type = "pagination";
 
 		$('#loader').show();
+		$('.screen_loader').show();
 
 		requestAjax({
 				url: window.location.origin + '/api/search/page',
@@ -63,6 +66,7 @@ $(function(){
 
 		if(planetics.page > 0){
 			$('#loader').show();
+			$('.screen_loader').show();
 			planetics.page -= 2;
 			this.dataset.type = "pagination";
 
@@ -86,10 +90,12 @@ $(function(){
 		$('.analysis_details').remove();
 		$('.analysis_cont>.operate').remove();
 		$('.analysis_loader').show();
+		$('.screen_loader').show();
 
 		if(this.dataset.type == 'social'){
 
 			$('.analysis_cont').show();
+			$('.screen_loader').show();
 
 			requestAjax({
 				url: window.location.origin + '/api/fetch/analysis/',
@@ -104,6 +110,7 @@ $(function(){
 		else if(this.dataset.type == 'news'){
 
 			$('.analysis_cont').show();
+			$('.screen_loader').show();
 
 			requestAjax({
 				url: window.location.origin + '/api/fetch/analysis/',
@@ -118,6 +125,7 @@ $(function(){
 		}
 		else if(this.dataset.type == 'dialog'){
 			$('.analysis_cont').hide();
+			$('.screen_loader').hide();
 		}
 	});
 });

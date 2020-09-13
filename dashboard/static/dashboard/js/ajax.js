@@ -53,6 +53,7 @@ var requestAjax=function(options, dataset){
 		}
 		else if(dataset.type == 'news'){
 			news_data = [{
+				'analysis_type': 'News Article',
 				'source_img':dataset.imgsourcesrc,
 				'publish':dataset.publishat,
 				'title':dataset.title,
@@ -77,6 +78,7 @@ var requestAjax=function(options, dataset){
 		else if(dataset.type == 'social'){
 
 			social_data = [{
+				'analysis_type': 'Social Post',
 				'source_img':dataset.imgsourcesrc,
 				'publish':dataset.publishat,
 				'title':dataset.title,
@@ -100,12 +102,14 @@ var requestAjax=function(options, dataset){
 		}
 
 		$('.analysis_loader').hide();
+		$('.screen_loader').hide();
 
 	}).fail(function( jqXHR, textStatus, errorThrown ) {
 		console.log(jqXHR);
 		alert(jqXHR.statusText);
 
 		$('#loader').hide();
+		$('.screen_loader').hide();
 	});
 }
 
