@@ -8,7 +8,7 @@ $(function(){
 	// create a scene
 	new ScrollMagic.Scene({
 	    //duration: 100, // the scene should last for a scroll distance of 100px
-	    offset: 120 // start this scene after scrolling for 50px
+	    offset: 60 // start this scene after scrolling for 50px
 	}).setPin('#search_panel_pin',{pushFollowers: false}).addTo(controller);
 
 	new ScrollMagic.Scene({
