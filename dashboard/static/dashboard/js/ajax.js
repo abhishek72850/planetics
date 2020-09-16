@@ -21,16 +21,35 @@ var requestAjax=function(options, dataset){
 			var n_tmpl = $.templates("#news_template");
 			var s_tmpl = $.templates("#social_template");
 
+			var empty = false;
+
+			if(data['data']['news'] === null){
+				empty = false;
+			}
+			if(data['data']['social'] !== null){
+				if(data['data']['social']['posts'].length > 0){
+					empty = true
+				}
+				else{
+					empty = false;
+				}
+			}
+			else{
+				empty = false;
+			}
+
+			if(empty){
+				$(".result_panel").empty();
+			}
+
 		    if(data['data']['news'] != null || data['data']['social'] != null){
 				if( data['data']['news'] != null){
-					$(".result_panel").empty();
 			    	var html_n = n_tmpl.render(data['data']['news']['value']);
 			    	$(".result_panel").append(html_n);
 			    }
 
 			    if( data['data']['social'] != null){
 		    		if(data['data']['social']['posts'].length > 0){
-		    			$(".result_panel").empty();
 		    			var html_s = s_tmpl.render(data['data']['social']['posts']);	
 						$(".result_panel").append(html_s);
 
