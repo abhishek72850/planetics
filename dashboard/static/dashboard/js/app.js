@@ -8,7 +8,7 @@ $(function(){
 	// create a scene
 	new ScrollMagic.Scene({
 	    //duration: 100, // the scene should last for a scroll distance of 100px
-	    offset: 60 // start this scene after scrolling for 50px
+	    offset: 50 // start this scene after scrolling for 50px
 	}).setPin('#search_panel_pin',{pushFollowers: false}).addTo(controller);
 
 	new ScrollMagic.Scene({
@@ -64,7 +64,7 @@ $(function(){
 
 	$('#prev_page').on('click',function(){
 
-		if(planetics.page > 0){
+		if(planetics.page > 1){
 			$('#loader').show();
 			$('.screen_loader').show();
 			planetics.page -= 2;

@@ -18,27 +18,31 @@ var requestAjax=function(options, dataset){
 
 			planetics.data = data;
 
-			$(".result_panel").empty();
-
 			var n_tmpl = $.templates("#news_template");
 			var s_tmpl = $.templates("#social_template");
 
-			if( data['data']['social'] != null){
-				var html_s = s_tmpl.render(data['data']['social']['posts']);	
-				$(".result_panel").append(html_s);
-
-				planetics.requestid = data['data']['social']['meta']['requestid'];
-			}
-
-			if( data['data']['news'] != null){
-		    	var html_n = n_tmpl.render(data['data']['news']['value']);
-		    }
-
 		    if(data['data']['news'] != null || data['data']['social'] != null){
-				$('#page_counter').text(planetics.page+1);
-				planetics.page++;
+				if( data['data']['news'] != null){
+					$(".result_panel").empty();
+			    	var html_n = n_tmpl.render(data['data']['news']['value']);
+			    	$(".result_panel").append(html_n);
+			    }
 
-				$(".result_panel").append(html_n);
+			    if( data['data']['social'] != null){
+		    		if(data['data']['social']['posts'].length > 0){
+		    			$(".result_panel").empty();
+		    			var html_s = s_tmpl.render(data['data']['social']['posts']);	
+						$(".result_panel").append(html_s);
+
+						planetics.requestid = data['data']['social']['meta']['requestid'];
+
+						planetics.page++;
+						$('#page_counter').text(planetics.page);
+		    		}
+		    		else{
+						alert('No Content Available!!!!');
+					}
+				}
 			}
 			else{
 				alert('No Content Available!!!!');
