@@ -13,6 +13,27 @@
 	box-shadow: 0 0 5px rgba(0,0,0,0.5);
 	max-height: 80%;
 }
+.analysis_loader{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.analysis_loader>img{
+	width: 50%;
+}
+#cancel_analysis{
+	margin-top: 2em;
+	height: 3em;
+	width: 10em;
+	border: 1px solid #ccc;
+}
+#cancel_analysis:hover{
+	color: #fff;
+	cursor: pointer;
+	border: 1px solid #555;
+	background-color: #f55;
+}
 .analysis_details{
 	width: 100%;
 }

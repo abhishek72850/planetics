@@ -9,7 +9,7 @@ var requestAjax=function(options, dataset){
 
 	$.extend(object,options);
 
-	xhr = $.ajax(object).done(function(data){
+	planetics.xhr = $.ajax(object).done(function(data){
 		console.log(data);
 
 		$.views.settings.allowCode(true);
@@ -139,7 +139,7 @@ var requestAjax=function(options, dataset){
 
 	}).fail(function( jqXHR, textStatus, errorThrown ) {
 		console.log(jqXHR);
-		alert(jqXHR.statusText);
+		console.log(jqXHR.statusText);
 
 		$('#loader').hide();
 		$('.screen_loader').hide();

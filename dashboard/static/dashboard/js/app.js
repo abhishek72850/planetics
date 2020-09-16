@@ -83,6 +83,13 @@ $(function(){
 		}	
 	});
 
+	$('#cancel_analysis').on('click', function(){
+		planetics.xhr.abort();
+		$('.analysis_loader').hide();
+		$('.analysis_cont').hide();
+		$('.screen_loader').hide();
+	});
+
 	$('body').delegate('#analyse','click',function(){
 
 		console.log(this.dataset);
