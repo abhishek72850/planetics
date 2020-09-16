@@ -45,6 +45,7 @@ var requestAjax=function(options, dataset){
 			}
 
 		    $('#loader').hide();
+		    $('.screen_loader').hide();
 
 		    $('.result_page_nav').prop(false);
 		}
@@ -52,6 +53,16 @@ var requestAjax=function(options, dataset){
 
 		}
 		else if(dataset.type == 'news'){
+			if(data['data']['visuals'] === null){
+				visuals = [];
+			}
+			else if(!data['data']['visuals']['success']){
+				visuals = [];
+			}
+			else{
+				visuals = data['data']['visuals']['data']['images'][0]['classifiers'][0]['classes'];
+			}
+
 			news_data = [{
 				'analysis_type': 'News Article',
 				'source_img':dataset.imgsourcesrc,
@@ -102,7 +113,6 @@ var requestAjax=function(options, dataset){
 		}
 
 		$('.analysis_loader').hide();
-		$('.screen_loader').hide();
 
 	}).fail(function( jqXHR, textStatus, errorThrown ) {
 		console.log(jqXHR);

@@ -46,6 +46,7 @@ class ContentFetcher(APIView):
 class ContentPageFetcher(APIView):
 
 	@method_decorator(cache_page(60*60*2))
+	@method_decorator(vary_on_cookie)
 	def get(self, request, format = None):
 
 		if 'query' in request.GET.keys():
