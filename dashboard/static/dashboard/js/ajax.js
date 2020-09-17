@@ -23,48 +23,46 @@ var requestAjax=function(options, dataset){
 
 			var empty = false;
 
-			if(data['data']['news'] === null){
+			if(data['data']['news'] === null && data['data']['social'] === null){
 				empty = false;
+				alert('No Content Available!!!!');
 			}
-			if(data['data']['social'] !== null){
+			else if(data['data']['news'] === null && data['data']['social'] !== null){
 				if(data['data']['social']['posts'].length > 0){
 					empty = true
 				}
 				else{
 					empty = false;
+					alert('No Content Available!!!!');
 				}
 			}
-			else{
-				empty = false;
+			else if(data['data']['news'] !== null && data['data']['social'] === null){
+				empty = true;
+			}
+			else if(data['data']['news'] !== null && data['data']['social'] !== null){
+				empty = true
 			}
 
 			if(empty){
+				if(dataset.type == 'pagination'){
+					planetics.page++;
+					$('#page_counter').text(planetics.page);
+				}
 				$(".result_panel").empty();
 			}
 
-		    if(data['data']['news'] != null || data['data']['social'] != null){
-				if( data['data']['news'] != null){
-			    	var html_n = n_tmpl.render(data['data']['news']['value']);
-			    	$(".result_panel").append(html_n);
-			    }
+			if( data['data']['news'] != null){
+		    	var html_n = n_tmpl.render(data['data']['news']['value']);
+		    	$(".result_panel").append(html_n);
+		    }
 
-			    if( data['data']['social'] != null){
-		    		if(data['data']['social']['posts'].length > 0){
-		    			var html_s = s_tmpl.render(data['data']['social']['posts']);	
-						$(".result_panel").append(html_s);
+		    if( data['data']['social'] != null){
+	    		if(data['data']['social']['posts'].length > 0){
+	    			var html_s = s_tmpl.render(data['data']['social']['posts']);	
+					$(".result_panel").append(html_s);
 
-						planetics.requestid = data['data']['social']['meta']['requestid'];
-
-						planetics.page++;
-						$('#page_counter').text(planetics.page);
-		    		}
-		    		else{
-						alert('No Content Available!!!!');
-					}
-				}
-			}
-			else{
-				alert('No Content Available!!!!');
+					planetics.requestid = data['data']['social']['meta']['requestid'];		
+	    		}
 			}
 
 		    $('#loader').hide();
