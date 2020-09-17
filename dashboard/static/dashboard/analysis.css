@@ -5,13 +5,13 @@
 	left: 25%;
 	background-color: #fff;
 	width: 50%;
-	min-height: 50%;
+	min-height: 80%;
+	max-height: 80%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	box-shadow: 0 0 5px rgba(0,0,0,0.5);
-	max-height: 80%;
 }
 .analysis_loader{
 	display: flex;
@@ -35,27 +35,50 @@
 	background-color: #f55;
 }
 .analysis_details{
-	width: 100%;
+	min-height: 60%;
+  max-height: 60%;
+	overflow-y: hidden;
 }
 .analysis_details>div{
 	
 }
-.analysis_details>div:first-child{
+.analysis_head{
 	background-image: url('/staticfiles/dashboard/images/bg.png');
 	background-repeat: no-repeat;
 	background-size: 100%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 0.6em 0;
 	border-bottom: 1px solid #ccc;
 }
-.analysis_details>div:last-child{
-	overflow-y: auto;
-	height: 33em;
+.analysis_operate{
+  width: 100%;
+	border-top: 1px solid #ccc;
+}
+.analysis_operate>div{
+	text-align: right;
+}
+.analysis_operate>div>button{
+	border: none;
+	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+	height: 3em;
+	width: 10em;
+	margin: 1em;
+	cursor: pointer;
+}
+.analysis_operate>div>button:hover{
+	background-color: #ddd;
+}
+
+.analysis_details>div:first-child{
+	background-color: #fff;
+	overflow-y: hidden;
+	height: 100%;
 	display: flex;
 }
-.analysis_details>div:last-child>div{
+.analysis_details>div:first-child>div{
 	margin: .5em 0;
 	padding: .5em;
 }
@@ -66,6 +89,7 @@
 .analysis_details .detail{
 	border-right: 1px solid #ccc;
 	width: 60%;
+	overflow-y: scroll;
 }
 .analysis_details .graphics{
 	border-right: 1px solid #ccc;
