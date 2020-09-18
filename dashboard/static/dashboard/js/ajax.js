@@ -74,6 +74,7 @@ var requestAjax=function(options, dataset){
 
 		}
 		else if(dataset.type == 'news'){
+			$('.analysis_cont').empty();
 			if(data['data']['visuals'] === null){
 				visuals = [];
 			}
@@ -108,7 +109,7 @@ var requestAjax=function(options, dataset){
 			$('.analysis_cont').append(html_analysis);
 		}
 		else if(dataset.type == 'social'){
-
+			$('.analysis_cont').empty();
 			social_data = [{
 				'analysis_type': 'Social Post',
 				'source_img':dataset.imgsourcesrc,
