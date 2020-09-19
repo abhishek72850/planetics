@@ -29,7 +29,10 @@ class PostManager:
 		data = None
 
 		if(req.status_code == 200):
-			data = req.json()
+			data = dict(req.json())
+			
+			if len(data.get('posts', [])) == 0:
+				return None
 
 		return data
 
@@ -59,6 +62,8 @@ class PostManager:
 		data = None
 		
 		if(req.status_code == 200):
-			data = req.json()
-
+			data = dict(req.json())
+			
+			if len(data.get('value', [])) == 0:
+				return None
 		return data
