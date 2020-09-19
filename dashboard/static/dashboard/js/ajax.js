@@ -56,7 +56,12 @@ var requestAjax=function(options, dataset){
 		    $('.result_page_nav').prop(false);
 		}
 		else if(dataset.type == 'news'){
-			$('.analysis_cont>div:not(:first-child)').empty();
+			$('.analysis_head').remove();
+			$('.analysis_details').remove();
+			$('.analysis_operate').remove();
+
+			var visuals = null;
+
 			if(data['data']['visuals'] === null){
 				visuals = [];
 			}
@@ -80,7 +85,7 @@ var requestAjax=function(options, dataset){
                 'keywords':data['data']['keywords'] === null ? []:data['data']['keywords']['keywords'],
                 'summary':data['data']['summary'] === null ? '':data['data']['summary'],
                 'sentences_tones':data['data']['tones'] === null ? []:data['data']['tones']['data']['sentences_tone'],
-				'visuals':data['data']['visuals'] === null ? []:data['data']['visuals']['data']['images'][0]['classifiers'][0]['classes']
+				'visuals': visuals
 			}];
 
 			console.log(news_data);
@@ -91,7 +96,10 @@ var requestAjax=function(options, dataset){
 			$('.analysis_cont').append(html_analysis);
 		}
 		else if(dataset.type == 'social'){
-			$('.analysis_cont>div:not(:first-child)').empty();
+			$('.analysis_head').remove();
+			$('.analysis_details').remove();
+			$('.analysis_operate').remove();
+			
 			social_data = [{
 				'analysis_type': 'Social Post',
 				'source_img':dataset.imgsourcesrc,
