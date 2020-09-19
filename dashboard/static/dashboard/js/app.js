@@ -94,8 +94,10 @@ $(function(){
 
 		console.log(this.dataset);
 
+		$('.analysis_head').remove();
 		$('.analysis_details').remove();
-		$('.analysis_cont>.operate').remove();
+		$('.analysis_operate').remove();
+		
 		$('.analysis_loader').show();
 		$('.screen_loader').show();
 

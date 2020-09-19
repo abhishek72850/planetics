@@ -56,10 +56,6 @@ var requestAjax=function(options, dataset){
 		    $('.result_page_nav').prop(false);
 		}
 		else if(dataset.type == 'news'){
-			$('.analysis_head').remove();
-			$('.analysis_details').remove();
-			$('.analysis_operate').remove();
-
 			var visuals = null;
 
 			if(data['data']['visuals'] === null){
@@ -96,10 +92,6 @@ var requestAjax=function(options, dataset){
 			$('.analysis_cont').append(html_analysis);
 		}
 		else if(dataset.type == 'social'){
-			$('.analysis_head').remove();
-			$('.analysis_details').remove();
-			$('.analysis_operate').remove();
-			
 			social_data = [{
 				'analysis_type': 'Social Post',
 				'source_img':dataset.imgsourcesrc,
