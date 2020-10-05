@@ -21,28 +21,13 @@ var requestAjax=function(options, dataset){
 			var n_tmpl = $.templates("#news_template");
 			var s_tmpl = $.templates("#social_template");
 
-			var empty = false;
+			var empty = true;
 
 			if(data['data']['news'] === null && data['data']['social'] === null){
 				empty = false;
 				alert('No Content Available!!!!');
 			}
-			else if(data['data']['news'] === null && data['data']['social'] !== null){
-				if(data['data']['social']['posts'].length > 0){
-					empty = true
-				}
-				else{
-					empty = false;
-					alert('No Content Available!!!!');
-				}
-			}
-			else if(data['data']['news'] !== null && data['data']['social'] === null){
-				empty = true;
-			}
-			else if(data['data']['news'] !== null && data['data']['social'] !== null){
-				empty = true
-			}
-
+			
 			if(empty){
 				if(dataset.type == 'pagination'){
 					planetics.page++;
@@ -51,12 +36,12 @@ var requestAjax=function(options, dataset){
 				$(".result_panel").empty();
 			}
 
-			if( data['data']['news'] != null){
+			if( data['data']['news'] !== null){
 		    	var html_n = n_tmpl.render(data['data']['news']['value']);
 		    	$(".result_panel").append(html_n);
 		    }
 
-		    if( data['data']['social'] != null){
+		    if( data['data']['social'] !== null){
 	    		if(data['data']['social']['posts'].length > 0){
 	    			var html_s = s_tmpl.render(data['data']['social']['posts']);	
 					$(".result_panel").append(html_s);
@@ -70,11 +55,9 @@ var requestAjax=function(options, dataset){
 
 		    $('.result_page_nav').prop(false);
 		}
-		else if(dataset.type == 'pagination'){
-
-		}
 		else if(dataset.type == 'news'){
-			$('.analysis_cont').empty();
+			var visuals = null;
+
 			if(data['data']['visuals'] === null){
 				visuals = [];
 			}
@@ -98,7 +81,7 @@ var requestAjax=function(options, dataset){
                 'keywords':data['data']['keywords'] === null ? []:data['data']['keywords']['keywords'],
                 'summary':data['data']['summary'] === null ? '':data['data']['summary'],
                 'sentences_tones':data['data']['tones'] === null ? []:data['data']['tones']['data']['sentences_tone'],
-				'visuals':data['data']['visuals'] === null ? []:data['data']['visuals']['data']['images'][0]['classifiers'][0]['classes']
+				'visuals': visuals
 			}];
 
 			console.log(news_data);
@@ -109,7 +92,6 @@ var requestAjax=function(options, dataset){
 			$('.analysis_cont').append(html_analysis);
 		}
 		else if(dataset.type == 'social'){
-			$('.analysis_cont').empty();
 			social_data = [{
 				'analysis_type': 'Social Post',
 				'source_img':dataset.imgsourcesrc,

@@ -36,8 +36,8 @@
 }
 .analysis_details{
 	min-height: 60%;
-  max-height: 60%;
-	overflow-y: hidden;
+  	max-height: 60%;
+	overflow-y: scroll;
 }
 .analysis_details>div{
 	
@@ -74,7 +74,7 @@
 
 .analysis_details>div:first-child{
 	background-color: #fff;
-	overflow-y: auto;
+	overflow-y: scroll;
 	height: 100%;
 	display: flex;
 }
