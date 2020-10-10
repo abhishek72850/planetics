@@ -1,0 +1,310 @@
+{% extends 'app_ui/analysis_base.html' %}
+
+
+{% block body%}
+
+<section>
+	<div class="search_panel" id="search_panel_pin">
+		<div class="search_form">
+			<form id="search_form">
+				<div>
+					<input type="text" name="search" placeholder="Enter topic or keywords to search for" required>
+				</div>
+				<div class="social_select">
+					<label for="social_network">Select Platform:</label>
+					<select name="social_network" id="social_network">
+						<option value="all" selected>ALL</option>
+						<option value="facebook">Facebook</option>
+						<option value="twitter">Twitter</option>
+						<option value="youtube">Youtube</option>
+						<option value="instagram">Instagram</option>
+					</select>
+				</div>
+				<div>
+					<button type="submit">
+						<span id="search_text">Search</span>
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="result_nav_panel">
+			<div>
+				<div class="result_page_nav">
+					<span class="pageWord">Page:</span>
+	                <span href="#" id="prev_page"> <img src="/staticfiles/app_ui/images/left.png" alt=""></span>
+	                <span id="page_counter" class="pageNumber">0</span>
+	                <span id="next_page"> <img src="/staticfiles/app_ui/images/right.png" alt=""></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="result_panel">
+
+		<!-- <div class="card">
+			<div>
+				<div class="source">
+					<span>Source</span>
+					<img src="#">
+				</div>
+				<div class="detail">
+					<div>
+						<span>Published On</span>
+					</div>
+					<div>
+						<h2>Title</h2>
+					</div>
+					<div>
+						<span>Link:</span>
+						<a href="#">URL</a>
+					</div>
+					<div>
+						<p>Description</p>
+					</div>
+				</div>
+			</div>
+			<div class="operate">
+				<div>
+					<button>Analyze</button>
+				</div>
+			</div>
+		</div> -->
+	</div>
+</section>
+<div class="screen_loader">
+	<div>
+		<img src="/staticfiles/app_ui/images/ripple.gif">
+	</div>
+</div>
+<div class="analysis_cont">
+	<div class="analysis_loader">
+		<img src="/staticfiles/app_ui/images/ripple.gif">
+		<button id="cancel_analysis">Cancel</button>
+	</div>
+</div> 
+
+<script id="analysis_template" type="text/x-jsrender">
+	<div class="analysis_head">
+		<h1>[%:analysis_type%] Analysis</h1>
+	</div>
+	<div class="analysis_details">
+		<div>
+			<div class="source">
+				<span>Source</span>
+				<img src="[%:source_img%]" alt="image">
+			</div>
+			<div class="detail">
+				<div>
+					<span >Published On : [%:publish%]</span>
+				</div>
+				<div>
+					<h2>[%:title%]</h2>
+				</div>
+				<div>
+					<span>Link:</span>
+					<a href="[%:link%]">[%:link%]</a>
+				</div>
+				<div class="sentiment">
+					[%if sentiment.length > 0%]
+						[%if sentiment = 'Negative'%]
+							<span>Overall document sentiment: <span class='sentiment_negative'>[%:sentiment onerror='None'%]</span></span>
+						[%else sentiment = 'Positive'%]
+							<span>Overall document sentiment: <span class='sentiment_positive'>[%:sentiment onerror='None'%]</span></span>
+						[%else%]
+							<span>Overall document sentiment: <span class='sentiment_neutral'>[%:sentiment onerror='None'%]</span></span>
+						[%/if%]	
+					[%else%]
+						<span class="no-sentiment no-result">Unable to extract sentiment from Article/Post</span>
+					[%/if%]
+				</div>
+				<div class="summary">
+					<h3>Summary of the Article/Post:</h3>
+					[%if summary.length > 0%]
+						<p>[%:summary onerror='No Summary'%]</p>
+					[%else%]
+						<p class="no-summary no-result">Unable to extract summary from Article/Post</p>
+					[%/if%]
+				</div>
+				<div class="analysis">
+					<div class="keywords">
+						<h3>Keywords found in Article/Post:</h3>
+						[%if keywords.length > 0%]
+							<div class="keywords-head">
+								<span>Keyword</span>
+								<span>Sentiment</span>
+								<span>Accuracy</span>
+							</div>
+							[%for keywords onError=""%]
+								<div class="keywords-row">
+									<span>[%:text%]</span>
+									<span>[%:sentiment.label%]</span>
+									<span>[%:relevance%]</span>
+								</div>
+							[%/for%]
+						[%else%]
+							<span class="no-keywords no-result">No keywords found</span>
+						[%/if%]
+					</div>
+						
+					<div class="tones">
+						<h3>Tones extracted for each sentences in Article/Post:</h3>
+						[%if sentences_tones.length > 0%]
+							<div class="tones-head">
+								<span>Sentence</span>
+								<span>Tone</span>
+							</div>
+							[%for sentences_tones onError=""%]
+								[%if tones.length > 0%]
+									<div class="tones-row">
+										<span>[%:text%]</span>
+										<span>[%:tones[0].tone_name%]</span>
+									</div>
+								[%/if%]
+							[%/for%]
+						[%else%]
+							<span class="no-tones no-result">No Tones found</span>
+						[%/if%]
+					</div>
+				</div>
+				<div class="text_content">
+					<h3>Original Article/Post:</h3>
+					<p>[%:text%]</p>
+				</div>
+			</div>
+			<div class="graphics">
+				<h2>Images</h2>
+				<div>
+					[%if images.length > 0%]
+						<img src="[%:images%]" alt="image">
+						<a href="[%:images%]">Click here to goto image</a>
+						<div>
+							<h3>Element detected in image:</h3>
+							[%if visuals.length > 0%]
+								<div class="graphics-head">
+									<span>Element</span>
+									<span>Accuracy</span>
+								</div>
+								[%for visuals onError=""%]
+									<div class="graphics-row">
+										<span>[%:class%]</span>
+										<span>[%:score%]</span>
+									</div>
+								[%/for%]
+							[%else%]
+								<span class="no-graphics no-result">No elements found</span>
+							[%/if%]
+						</div>
+					[%else%]
+						<span class="no-result">No images found</span>
+					[%/if%]
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="analysis_operate">
+		<div>
+			<button id="analyse" data-type="dialog">Close</button>
+		</div>
+	</div>
+</script>
+
+<script id="social_template" type="text/x-jsrender">
+
+	<div class="card">
+		<div>
+			<div class="source">
+				<span>Source</span>
+				<img src="http://www.[%:network%].com/favicon.ico" alt="[%:network%]">
+			</div>
+			<div class="detail">
+				<div>
+					<span >Published On : [%:posted%]</span>
+				</div>
+				<div>
+					<h2>
+					[%if network == "facebook"%]
+						[%:urls[0].text%]
+					[%else%]
+						[%:user.name%]
+					[%/if%]
+					</h2>
+				</div>
+				<div>
+					<span>Link:</span>
+					<a href="[%:url%]">[%:url%]</a>
+				</div>
+				<div>
+					<p>[%:text%]</p>
+				</div>
+			</div>
+		</div>
+		<div class="operate">
+			<div>
+				<button
+					id="analyse"
+					data-type="social"
+					data-imgSourceSrc="http://www.[%:network%].com/favicon.ico"
+					data-imgAlt="[%:network%]"
+					data-imgArticle=""
+					data-publishAt="[%:posted%]"
+					data-title="[%if network == "facebook"%]
+									[%:urls[0].text%]
+								[%else%]
+									[%:user.name%]
+								[%/if%]"
+					data-url="[%:url%]"
+					data-text="[%:text%]"
+					>Analyze</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="news_template" type="text/x-jsrender">
+
+	<div class="card">
+		<div>
+			<div class="source">
+				<span>Source</span>
+
+				<img src="[%:provider[0].image.thumbnail.contentUrl.split('&')[0] onerror=''%]" alt="[%:provider[0].name%]">
+			</div>
+			<div class="detail">
+				<div>
+					<span >Published On : [%:datePublished%]</span>
+				</div>
+				<div>
+					<h2>[%:name%]</h2>
+				</div>
+				<div>
+					<span>Link:</span>
+					<a href="[%:url%]">[%:url%]</a>
+				</div>
+				<div>
+					<p>[%:description%]</p>
+				</div>
+			</div>
+			<div class="graphics">
+				<div>
+					<img src="[%:image.thumbnail.contentUrl.split('&')[0] onerror=''%]" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="operate">
+			<div>
+				<button 
+					id="analyse"
+					data-type="news"
+					data-imgSourceSrc="[%:provider[0].image.thumbnail.contentUrl.split('&')[0] onerror=''%]"
+					data-imgAlt="[%:provider[0].name%]"
+					data-imgArticle="[%:image.thumbnail.contentUrl.split('&')[0] onerror=''%]"
+					data-publishAt="[%:datePublished%]"
+					data-title="[%:name%]"
+					data-url="[%:url%]"
+					data-text="[%:description%]"
+					>Analyze</button>
+			</div>
+		</div>
+	</div>
+</script>
+
+{% endblock %}

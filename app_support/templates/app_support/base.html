@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block title%}
+    {% endblock %}
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app_support/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app_support/logout.css' %}">
+
+    {% block dependency%}
+    {% endblock %}
+
+    <script type="text/javascript" src="{% static 'app_support/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app_support/js/moment.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app_support/js/moment_timezone.js' %}"></script>
+
+    <script>
+		var app_env = {
+		    csrf_token: '{{ csrf_token }}',
+		    user_id: new URL(window.location.href).searchParams.get('id'),
+		    subscription_id: new URL(window.location.href).searchParams.get('id')
+		};
+	</script>
+</head>
+<body>
+
+{% block body%}
+{% endblock %}
+
+<div class="loader_cont">
+    <div class="loader">
+        <img src="/staticfiles/app_support/images/ripple.gif">
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $('.loader_cont').hide();
+        $('.payment_detail_overlay_cont').hide();
+        setInterval(function(){ $('.timestamp').text(Date()); }, 1000);
+    });
+</script>
+
+<script type="text/javascript" src="{% static 'app_support/js/ajax.js' %}"></script>
+<script type="text/javascript" src="{% static 'app_support/js/app.js' %}"></script>
+
+</body>
+</html>

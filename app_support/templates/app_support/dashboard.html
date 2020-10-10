@@ -1,0 +1,44 @@
+{% extends 'app_support/base.html' %}
+
+{% block title %}
+    <title>Admin Dashboard</title>
+{% endblock %}
+
+{% block dependency%}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app_support/dashboard.css' %}">
+{% endblock %}
+
+{% block body%}
+
+{% include 'app_support/header.html' %}
+<section>
+    <div class="feature_card_cont">
+        <div class="sub_card">
+            <a href="{% url 'manage_users' %}">
+                <span>Manage Users</span>
+            </a>
+        </div>
+        <div class="sub_card">
+            <a href="{% url 'assign_test_plan' %}">
+                <span>Assign Test Plan</span>
+            </a>
+        </div>
+        <div class="sub_card">
+            <a href="{% url 'plan_request_change' %}">
+                <span>Plan Change Request</span>
+            </a>
+        </div>
+        <div class="sub_card">
+            <a href="{% url 'upcoming_plan' %}">
+                <span>Upcoming User Plans</span>
+            </a>
+        </div>
+        <div class="sub_card">
+            <a href="{% url 'user_plan_history' %}">
+                <span>User Plan History</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
