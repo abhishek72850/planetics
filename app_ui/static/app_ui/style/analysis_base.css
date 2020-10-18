@@ -13,24 +13,15 @@ body{
 }
 nav{
 	position: absolute;
-	top: 0 !important;
-	background-color: #fff;
-	z-index: 5;
+	top: 0;
+	z-index: 9;
 	width: 100%;
-	height: 7%;
 	/*box-shadow: 0 2px 5px rgba(0,0,0,0.5);*/
-	display: flex;
-	align-items: center;
-}
-nav>div{
-	margin: 0 .5em;
-}
-.app_name{
-	margin-left: 4.5em;
 }
 nav{
     background-color: #bba3d3;
-    display: flex;
+		display: flex;
+		align-items: center;
     justify-content: flex-end;
     height:50px;
 }
@@ -39,13 +30,12 @@ nav>ul>li>a{
     text-decoration: none;
     background-color: #9c7bbc;
     padding:15px 20px;
-    
 }
 .menu{
     list-style: none;
     margin-right:60px;
 }
-nav ul li{
+nav>ul>li{
     display:inline-block;
     margin: 0px 30px;
     
