@@ -6,10 +6,10 @@ $(function(){
 	$('.result_page_nav').prop(true);
 
 	// create a scene
-	new ScrollMagic.Scene({
+	// new ScrollMagic.Scene({
 	    //duration: 100, // the scene should last for a scroll distance of 100px
-	    offset: 50 // start this scene after scrolling for 50px
-	}).setPin('#search_panel_pin',{pushFollowers: false}).addTo(controller);
+	    // offset: 50 // start this scene after scrolling for 50px
+	// }).setPin('#search_panel_pin',{pushFollowers: false}).addTo(controller);
 
 
 	$('#search_form').on('submit',function(e){
