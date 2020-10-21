@@ -235,7 +235,7 @@ class SendUserVerificationLink(APIView):
 
 			if len(user_set) > 0:
 				token = generate_token(email=user_set[0].email, user_id=user_set[0].id)
-				email_verification_url = '{}/api/account/confirm_email?verification_code={}'.format(get_host_origin(request),
+				email_verification_url = '{}/api/account/confirm_email?verification_code={}&format=json'.format(get_host_origin(request),
 																							token)
 				send_email_verification_link(user_set[0], email_verification_url)
 

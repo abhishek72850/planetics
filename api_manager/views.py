@@ -74,7 +74,7 @@ class AccountRegister(APIView):
                 user = form.save()
                 if user is not None:
                     token = generate_token(email=user.email, user_id=user.id)
-                    email_verification_url = '{}/api/account/confirm_email?verification_code={}'.format(
+                    email_verification_url = '{}/api/account/confirm_email?verification_code={}&format=json'.format(
                         get_host_origin(request), token)
                     send_email_verification_link(user, email_verification_url)
                     return Response(data={'data': user.toJSON()}, status=status.HTTP_200_OK)
