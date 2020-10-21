@@ -10,5 +10,5 @@ setup.sh
 dashboard/*
 apimanager/*
 subscriber
-staticfiles
+# staticfiles
 dashboard/templates/dashboard
