@@ -14,7 +14,7 @@ section{
 	z-index: 1;
 	min-height: 18em;
 	max-height: 18em;
-	background-image: url('/staticfiles/app_ui/images/bg.png');
+	background-image: url('/static/app_ui/images/bg.png');
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-color: #fff;

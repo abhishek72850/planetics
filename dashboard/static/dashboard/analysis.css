@@ -43,7 +43,7 @@
 	
 }
 .analysis_head{
-	background-image: url('/staticfiles/dashboard/images/bg.png');
+	background-image: url('/static/dashboard/images/bg.png');
 	background-repeat: no-repeat;
 	background-size: 100%;
 	width: 100%;
@@ -102,7 +102,7 @@
 	text-align:center;
 }
 .sentiment>span{
-	background-image: url('/staticfiles/dashboard/images/bg.png');
+	background-image: url('/static/dashboard/images/bg.png');
 	background-repeat: no-repeat;
 	background-size: 300%;
 	display: inline-flex;

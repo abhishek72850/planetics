@@ -6,7 +6,7 @@ section{
 }
 
 .search_panel{
-	background-image: url('/staticfiles/dashboard/images/bg.png');
+	background-image: url('/static/dashboard/images/bg.png');
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-color: #fff;
